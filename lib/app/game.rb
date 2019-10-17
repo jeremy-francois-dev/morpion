@@ -6,6 +6,10 @@ class Game
     @board_game = Board.new
   end
 
+  def position  
+  # to doooo
+  end
+
   def victory?
     #victory player1
     if @board_game.hash_board[:a1] == @player1.symbol && @board_game.hash_board[:b1] == @player1.symbol && @board_game.hash_board[:c1] == @player1.symbol ||
