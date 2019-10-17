@@ -6,11 +6,18 @@ require 'app/player'
 require 'app/board'
 require 'app/game'
 
-game = Game.new
+def perform
+  game = Game.new
+  while game.still_on_going?
+  game.board_game.show
+  game.placement(game.player1)
+  game.board_game.show
+  game.victory?
+  game.placement(game.player2)
+  game.board_game.show
+  game.victory?
+  end
+end
 
-game.board_game.show
-
-puts game.victory?
-
-
+perform
 
