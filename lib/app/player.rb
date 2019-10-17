@@ -9,4 +9,5 @@ class Player
     @symbol = symbol
     puts " Super #{@name}, le symbole '#{@symbol}' t'a été attribué !"
   end
+
 end

@@ -6,8 +6,11 @@ class Game
     @board_game = Board.new
   end
 
-  def position  
-  # to doooo
+  def placement(player)
+    #we put the symbol of the player in the case
+    puts "Merci de rentrer ton choix de case #{player.name}"
+    choice = gets.chomp.to_sym
+    board_game.hash_board[choice] = player.symbol
   end
 
   def victory?
