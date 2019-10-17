@@ -8,15 +8,15 @@ require 'app/game'
 
 def perform
   game = Game.new
-  while game.still_on_going?
-  game.board_game.show
-  game.placement(game.player1)
-  game.board_game.show
-  game.victory?
-  game.placement(game.player2)
-  game.board_game.show
-  game.victory?
+  while game.victory? == false && game.draw? == false
+    game.board_game.show
+    game.placement(game.player1)
+    game.board_game.show
+    if game.victory? == false && game.draw? == false
+      game.placement(game.player2)
+    end
   end
+  game.show_result
 end
 
 perform

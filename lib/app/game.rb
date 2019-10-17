@@ -6,10 +6,16 @@ class Game
     @board_game = Board.new
   end
 
+  
   def placement(player)
-    #we put the symbol of the player in the case
-    puts "Merci de rentrer ton choix de case #{player.name}"
+    puts "Merci de rentrer ton choix de case #{player.name}"    
     choice = gets.chomp.to_sym
+    #we check the choice made by the player is the valide key
+    while !(@board_game.hash_board.has_key?(choice)) || @board_game.hash_board[choice] != " "
+      puts "Merci de rentrer une clé valide et libre"
+      choice = gets.chomp.to_sym
+    end
+    #we put the symbol of the player in the case
     @board_game.hash_board[choice] = player.symbol
   end
 
@@ -23,8 +29,7 @@ class Game
       @board_game.hash_board[:c1] == @player1.symbol && @board_game.hash_board[:c2] == @player1.symbol && @board_game.hash_board[:c3] == @player1.symbol ||
       @board_game.hash_board[:a1] == @player1.symbol && @board_game.hash_board[:b2] == @player1.symbol && @board_game.hash_board[:c3] == @player1.symbol ||
       @board_game.hash_board[:c1] == @player1.symbol && @board_game.hash_board[:b2] == @player1.symbol && @board_game.hash_board[:a3] == @player1.symbol 
-      puts "Bravo #{@player1.name}, tu as gagné !"
-      return true
+      return @player1
     #victory player2
     elsif @board_game.hash_board[:a1] == @player2.symbol && @board_game.hash_board[:b1] == @player2.symbol && @board_game.hash_board[:c1] == @player2.symbol ||
       @board_game.hash_board[:a2] == @player2.symbol && @board_game.hash_board[:b2] == @player2.symbol && @board_game.hash_board[:c2] == @player2.symbol ||
@@ -34,8 +39,7 @@ class Game
       @board_game.hash_board[:c1] == @player2.symbol && @board_game.hash_board[:c2] == @player2.symbol && @board_game.hash_board[:c3] == @player2.symbol ||
       @board_game.hash_board[:a1] == @player2.symbol && @board_game.hash_board[:b2] == @player2.symbol && @board_game.hash_board[:c3] == @player2.symbol ||
       @board_game.hash_board[:c1] == @player2.symbol && @board_game.hash_board[:b2] == @player2.symbol && @board_game.hash_board[:a3] == @player2.symbol 
-      puts "Bravo #{@player2.name}, tu as gagné !"
-      return true  
+      return @player2
     else
       return false    
     end
@@ -47,6 +51,13 @@ class Game
 
   def still_on_going?
     victory? == false && draw? == false
+  end
 
+  def show_result
+    if victory? == @player1 || victory? == @player2
+      puts "Bravo !!! Tu as gagné #{victory?.name}"
+    else 
+      puts "C'est un match nul !!!"
+    end
   end
 end
