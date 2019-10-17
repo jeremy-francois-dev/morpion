@@ -4,11 +4,13 @@ Bundler.require
 $:.unshift File.expand_path("./../lib", __FILE__)
 require 'app/player'
 require 'app/board'
+require 'app/game'
 
+game = Game.new
 
-board1 = Board.new
-board1.show
-puts board1.a1
+game.board_game.show
+
+puts game.victory?
 
 
 
